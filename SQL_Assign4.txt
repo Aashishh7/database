@@ -1,0 +1,13 @@
+select Onum,Amt,Odate from Orders;
+
+select * from customers where Snum=1001;
+
+select city, sname,snum,comm from Salespeople;
+
+select rating from customers where city='san jose';
+
+select snum
+    -> from orders
+    -> group by Snum
+    -> order by Snum
+    -> ;
