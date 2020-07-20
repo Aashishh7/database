@@ -1,0 +1,37 @@
+Exercise2
+
+
+1.   select * from supplier
+    -> order by CITY DESC;
+
+
++------+----------+--------+--------+
+| S#   | Sname    | Status | City   |
++------+----------+--------+--------+
+| S5   | Anne     | 28     | Paris  |
+| S1   | bob      | 25     | london |
+| S3   | oswald   | 12     | london |
+| S1   | bob      | 25     | london |
+| S3   | oswald   | 12     | london |
+| S1   | bob      | 25     | london |
+| S3   | oswald   | 12     | london |
+| S2   | shinchan | 22     | Athens |
+| S2   | shinchan | 22     | Athens |
+| S2   | shinchan | 22     | Athens |
+| S4   | Jay      | 10     | Athens |
++------+----------+--------+--------+
+
+
+3.SELECT * from supplier where status between 10 and 20;
++------+--------+--------+--------+
+| S#   | Sname  | Status | City   |
++------+--------+--------+--------+
+| S3   | oswald | 12     | london |
+| S3   | oswald | 12     | london |
+| S3   | oswald | 12     | london |
+| S4   | Jay    | 10     | Athens |
++------+--------+--------+--------+
+
+
+5.select Pname from parts where Pname LIKE 'S%';
+
