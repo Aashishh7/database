@@ -1,0 +1,70 @@
+1.1) Assume there is a table called Multicust, with all of the same column definitions
+as Salespeople. Write a command that inserts all salespeople with more than one
+customer into this table.
+
+CREATE TABLE Multicast AS
+SELECT * FROM salespeople
+WHERE snum IN (SELECT snum FROM customers GROUP BY snum HAVING count(snum)>1);
+
+insert into multicust
+(select * from salespeople
+where Snum =ANY
+(select Snum from
+(select Snum,count(Snum) from customers
+group by snum
+having count(snum)>1) as tempp));
+
+Query OK, 2 rows affected, 1 warning (0.21 sec)
+Records: 2  Duplicates: 0  Warnings: 1
+
+select * from multicast;
++------+--------+----------+------+
+| Snum | Sname  | City     | Comm |
++------+--------+----------+------+
+| 1001 | Peel   | London   | 0.12 |
+| 1002 | Serres | San Jose | 0.13 |
++------+--------+----------+------+
+
+
+2.Write a command that deletes all customers with no current orders.
+
+INSERT INTO customers
+VALUES(2012,'ASHISH','ISHAAN',500,1005);
+
+Query OK, 1 row affected (0.00 sec)
+
+delete from customers where cnum =(select tempp.cnum from (select cnum from customers where cnum not in (select cnum from orders)) as tempp);
+
+
+3.Write a command that increases by twenty percent the commissions of all
+salespeople with total orders above Rs. 3,000.
+
+SELECT * FROM salespeople;
+
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1004 | Motika  | London    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | Axelrod | New York  | 0.10 |
+| 1100 | Blanco  | San Jose  | NULL |
++------+---------+-----------+------+
+
+UPDATE salespeople SET comm=comm*1.20
+WHERE snum IN (SELECT snum FROM orders WHERE amt>3000);
+
+
+SELECT * FROM salespeople;
+
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.17 |
+| 1002 | Serres  | San Jose  | 0.23 |
+| 1004 | Motika  | London    | 0.16 |
+| 1007 | Rifkin  | Barcelona | 0.22 |
+| 1003 | Axelrod | New York  | 0.14 |
+| 1100 | Blanco  | San Jose  | NULL |
++------+---------+-----------+------+
