@@ -54,11 +54,7 @@
 |    300 |
 +--------+
 
-5.select snum
-   from orders
-  group by Snum
-    order by Snum
-   ;
+5.select snum from orders group by Snum order by Snum ;
 
 +------+
 | snum |
